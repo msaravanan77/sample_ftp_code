@@ -1,0 +1,61 @@
+
+Mon Aug 18 19:46:55 IST 2008
+	Userauth completed with following minimal features.
+		i) 1st it checks wether user have valid username/password combination.
+		ii) After successfull username/password validation, it checks the file permission for the given particular user. If everything ok, then it start transfers the file OR else it sends the error to client. (Ex: Err|Permission denied)
+===========================================================================================
+Sun Aug 17 06:27:51 IST 2008
+	
+Fixed:
+	in client.c always file offset is incremented by "MAX_PACKET_SIZE" instead of 'number of received packets'. That's the reason some bytes were missing when file transferring b/w two diff physical systems. It has been rectified in this version and tested with multiple binary files upto maximum filesize of 640MB.
+	
+Todo:
+	i) server sholud handle multiple client requests. Right now its serving only one client at a movement.	
+	ii) Userauth has to be improved. for ex it should be able to check file permissions based on username/id and then serve the file to client.
+===========================================================================================
+Sun Aug 17 05:08:51 IST 2008
+	just before removing unwanted variables and comments.
+	username/password structure is created in seperate .h file and its used. Getting password from user done using getpass sys call.
+===========================================================================================
+Tue Aug 12 21:13:01 IST 2008
+	User Authentication Module implementd successfully with PAM authentication API.
+Issues:
+	its working fine with localhost. But there is issue in transferring files b/w 2 diff systems.
+Todo:
+	i) User Authentication has to be improved and it should be able to serve only if user have authentication to retrive that particular file. (Ex:setuid)
+	ii) File transfer issue (b/w 2 diff physical computers) has to be fixed in next version itself, since it won't be usualbe unless this bug fixed.
+Implement Later:
+	Right now it supports only upto 2GB filesize transfer. This has to be fixed later using the following compilation options.
+	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
+	
+This is the version copied to vikas systems.
+===========================================================================================
+Mon Aug  4 20:01:21 IST 2008
+	tested with 638MB binary file and its ok. 
+Fixed:
+	There is logic mistake in FLAG variable setting. Its resolved and file transfer ok.	
+===========================================================================================
+Thu Jul 31 23:44:39 IST 2008
+        Its working for Binary files now. Tested upto 12MB Binary files.
+Issues:
+        there is some issues with buffer clearing. Not working after 2 transfers.
+===========================================================================================
+Tue Jul 29 17:56:35 IST 2008
+	Base version is working.
+Functionalities:
+	Server Listens in port 5000
+	Client gives the request with filename as parameter. It received and prints in the screen.
+
+	
+-----------------------------------------------------------------------------
+NOTES:
+ftp server/client development:
+        a) Multi client request should be handled in child process.
+        b) USER AUTHENTICATION MODULE HAS TO BE IMPLEMENTED.
+-----------------------------------------------------------------------------
+
+	Transfer timestamp has to be captured and display to client.
+
+KNOWN ISSUES/RESTRICTIONS:
+	a) Filename lenght with absolute path should be only upto 512 bytes. (variable declared with 512 max size)
+

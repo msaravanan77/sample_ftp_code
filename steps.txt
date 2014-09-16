@@ -1,0 +1,14 @@
+NOTES:
+ftp server/client development:
+        a) Multi client request should be handled in child process.
+        b) USER AUTHENTICATION MODULE HAS TO BE IMPLEMENTED.
+		It should be functional completely. (only user have permission to read has to be transferred.)
+	c) Later start implementing the commands one by one.
+	d) File size larger than 2GB support has to be implemented and tested.
+
+	
+
+
+	i) Username validation should be done with priority. Since Username validation has to happen only once, and that particular session should be kept alive still that particular user logging out.
+	
+
